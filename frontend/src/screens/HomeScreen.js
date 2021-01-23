@@ -15,7 +15,7 @@ export default function HomeScreen() {
     useEffect(()=>{
         dispatch(listProducts());
     }, []);
-    
+
     return (
         <div>
             {loading ? 
@@ -28,6 +28,5 @@ export default function HomeScreen() {
                     ))} 
                 </div>)}
         </div>
-        
     )
 }
