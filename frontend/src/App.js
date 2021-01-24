@@ -26,7 +26,7 @@ function App() {
             </header>
             <main>
                 <Route exact path="/" component={HomeScreen}></Route>
-                <Route path="/product/:id" component={ProductScreen}></Route>
+                <Route path="/products/:id" component={ProductScreen}></Route>
                 <Route path="/cart/:id?" component={CartScreen}></Route>
             </main>
             <footer className="row center">(2021) - All rights reserved</footer>
