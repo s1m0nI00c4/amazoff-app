@@ -1,14 +1,23 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { createOrder } from '../actions/orderActions';
 import CheckoutSteps from '../components/CheckoutSteps'
+import { ORDER_CREATE_RESET } from '../constants/orderConstants';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 
 export default function PlaceOrderScreen(props) {
+    //check if payment methos has been defined
     const cart = useSelector(state=> state.cart);
     if(!cart.paymentMethod){
         props.history.push('/payment')
     }
+
+    //check if order has been placed
+    const orderCreate = useSelector(state => state.orderCreate);
+    const {loading, success, error, order} = orderCreate;
 
     const toPrice = (num) => Number(num.toFixed(2));
     cart.itemsPrice = toPrice(cart.cartItems.reduce((a, c)=> a + c.qty*c.price, 0));
@@ -16,9 +25,17 @@ export default function PlaceOrderScreen(props) {
     cart.taxPrice = toPrice(cart.itemsPrice*0.22);
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
+    const dispatch = useDispatch();
     const placeOrderHandler = () => {
-
+        dispatch(createOrder({...cart, orderItems: cart.cartItems}));
     }
+
+    useEffect(() => {
+        if(success){
+            props.history.push(`/order/${order._id}`);
+            dispatch({type: ORDER_CREATE_RESET});
+        }
+    }, [success, dispatch, order, props.history])
 
     return (
         <div>
@@ -105,6 +122,12 @@ export default function PlaceOrderScreen(props) {
                             <li>
                                 <button type="button" onClick={placeOrderHandler} className="primary block" disabled={cart.cartItems.length === 0}>Place order</button>
                             </li>
+                            {loading && 
+                                <LoadingBox></LoadingBox>
+                            }
+                            {error &&
+                                <MessageBox variant="danger">{error}</MessageBox>
+                            }
                         </ul>
                     </div>
                 </div>
