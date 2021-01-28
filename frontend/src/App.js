@@ -46,19 +46,44 @@ function App() {
                             <i className="fa fa-caret-down"></i>
                           </Link>
                           <ul className="dropdown-content">
-                          <li>
-                              <Link to="/profile">User profile</Link>
+                            <li>
+                                <Link to="/profile">User profile</Link>
                             </li>
                             <li>
-                              <Link to="/orderhistory">Order history</Link>
+                                <Link to="/orderhistory">Order history</Link>
                             </li>
                             <li>
-                              <Link to="#signout" onClick={signoutHandler}>Sign out</Link>
+                                <Link to="#signout" onClick={signoutHandler}>Sign out</Link>
                             </li>
                           </ul>
                         </div>
                       ) : (
                         <Link to="/signin">Sign in</Link>
+                      )
+                    }
+                    {
+                      userInfo && userInfo.isAdmin && (
+                        <div className="dropdown">
+                          <Link to="#admin">
+                            Admin <span> </span>
+                            <i className="fa fa-caret-down"></i>
+                          </Link>
+                          <ul className="dropdown-content">
+                            <li>
+                              <Link to="/dashboard">Dashboard</Link>
+                            </li>
+                            <li>
+                              <Link to="/productlist">Product List</Link>
+                            </li>
+                            <li>
+                              <Link to="/orderlist">Order List</Link>
+                            </li>
+                            <li>
+                              <Link to="/userlist">User List</Link>
+                            </li>
+                          </ul>
+                        </div>
+
                       )
                     }
                 </div>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { detailsUser, updateUserProfile } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
+import { USER_DETAILS_RESET, USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 export default function ProfileScreen() {
     const [name, setName] = useState('');
@@ -23,8 +23,8 @@ export default function ProfileScreen() {
     const dispatch = useDispatch();
     useEffect(()=> {
         if(!user){
-            dispatch({type: USER_UPDATE_PROFILE_RESET});
             dispatch(detailsUser(userInfo._id));
+            dispatch({type: USER_UPDATE_PROFILE_RESET});
         } else {
             setName(user.name);
             setEmail(user.email);
@@ -35,6 +35,7 @@ export default function ProfileScreen() {
         if(password !== confirmPassword){
             alert("Password and Confirm Password do not match")
         } else{
+            dispatch({type: USER_DETAILS_RESET});
             dispatch(updateUserProfile({
                 userId: user._id, 
                 name,
