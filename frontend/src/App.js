@@ -4,6 +4,7 @@ import {BrowserRouter, Link, Route} from 'react-router-dom';
 import { signout } from './actions/userActions';
 import CartScreen from './screens/CartScreen';
 import HomeScreen from './screens/HomeScreen';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import OrderScreen from './screens/OrderScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
@@ -43,7 +44,12 @@ function App() {
                             <i className="fa fa-caret-down"></i>
                           </Link>
                           <ul className="dropdown-content">
-                            <Link to="#signout" onClick={signoutHandler}>Sign out</Link>
+                            <li>
+                              <Link to="/orderhistory">Order history</Link>
+                            </li>
+                            <li>
+                              <Link to="#signout" onClick={signoutHandler}>Sign out</Link>
+                            </li>
                           </ul>
                         </div>
                       ) : (
@@ -62,6 +68,7 @@ function App() {
                 <Route path="/placeorder" component={PlaceOrderScreen}></Route>
                 <Route path="/cart/:id?" component={CartScreen}></Route>
                 <Route path="/order/:id" component={OrderScreen}></Route>
+                <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
             </main>
             <footer className="row center">(2021) - All rights reserved</footer>
         </div>
