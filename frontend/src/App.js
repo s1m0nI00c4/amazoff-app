@@ -9,6 +9,7 @@ import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import OrderScreen from './screens/OrderScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import ProductListScreen from './screens/ProductListScreen';
 import ProductScreen from './screens/ProductScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
@@ -100,6 +101,7 @@ function App() {
                 <Route path="/order/:id" component={OrderScreen}></Route>
                 <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
                 <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
+                <PrivateRoute path="/productlist" component={ProductListScreen}></PrivateRoute>
             </main>
             <footer className="row center">(2021) - All rights reserved</footer>
         </div>
